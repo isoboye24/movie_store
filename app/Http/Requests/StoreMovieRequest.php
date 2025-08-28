@@ -26,6 +26,7 @@ class StoreMovieRequest extends FormRequest
         'released' => ['required', 'integer', 'digits:4'],
         'description' => ['nullable', 'string', 'min:5', 'max:1000'],
         'image_url' => ['nullable', 'string'],
+        'director_id' => ['required', 'integer', 'exists:directors,id'],
         ];
     }
     public function messages()
@@ -37,6 +38,7 @@ class StoreMovieRequest extends FormRequest
             'released.digits' => 'Das Jahr muss genau 4 Ziffern haben.',
             'description.min' => 'Die Beschreibung muss mindestens 5 Zeichen lang sein.',
             'description.max' => 'Die Beschreibung darf maximal 1000 Zeichen haben.',
+            'director_id.required' => 'Der regisseur ist erforderlich.',
         ];
     }
 

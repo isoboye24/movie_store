@@ -17,7 +17,7 @@
                 <th class="py-2 px-4 border-b text-left">ID</th>
                 <th class="py-2 px-4 border-b text-left">Titel</th>
                 <th class="py-2 px-4 border-b text-left">Erscheinungsjahr</th>
-                <th class="py-2 px-4 border-b text-left">Beschreibung</th>
+                <th class="py-2 px-4 border-b text-left">Regisseur</th>
                 <th class="py-2 px-4 border-b text-left">Actions</th>
             </tr>
         </thead>
@@ -27,7 +27,8 @@
                         <td class="py-2 px-4 border-b">{{ $movie->id }}</td>
                         <td class="py-2 px-4 border-b">{{ $movie->title }}</td>
                         <td class="py-2 px-4 border-b">{{ $movie->released }}</td>
-                        <td class="py-2 px-4 border-b">{{ \Illuminate\Support\Str::limit($movie->description, 10) }}</td>
+                        <td class="py-2 px-4 border-b">{{ $movie->director->name }}</td>
+
                         <td class="py-2 px-4 border-b flex space-x-2">
                             <!-- View -->
                             <a href="{{ route('movies.show', $movie->id) }}" class="text-blue-500 hover:text-blue-700">
@@ -65,7 +66,7 @@
                 @endforeach
                 @if($movies->isEmpty())
                     <tr>
-                        <td colspan="5" class="text-center py-4">No movies found.</td>
+                        <td colspan="5" class="text-center py-4">No movie found.</td>
                     </tr>
                 @endif
             </tbody>

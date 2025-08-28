@@ -60,7 +60,7 @@
                 @endforeach
                 @if($directors->isEmpty())
                     <tr>
-                        <td colspan="5" class="text-center py-4">No movies found.</td>
+                        <td colspan="5" class="text-center py-4">No director found.</td>
                     </tr>
                 @endif
             </tbody>

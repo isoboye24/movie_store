@@ -14,7 +14,13 @@ class Movie extends Model
         'title',
         'released',
         'description',
-        'image_url',   
+        'image_url',
+        'director_id',
     ];
+
+    public function director()
+    {
+        return $this->belongsTo(Director::class);
+    }
 
 }

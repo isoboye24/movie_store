@@ -4,10 +4,6 @@
 
 @section('content')
 <div class="px-10 py-5">
-    <div class="mb-20">
-        <h2 class="text-2xl text-center text-white font-semibold mt-10 mb-5 bg-blue-500 py-5">Movies</h2>
-    </div>
-    
     <div class="relative w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
         @foreach ($movies as $movie)
             <!-- Card -->
@@ -27,7 +23,10 @@
                         Erscheinungsjahr: <strong>{{ $movie->released }}</strong> 
                     </p>
                     <p class="mb-2 text-base text-neutral-500 dark:text-neutral-300">
-                        {{ $movie->description }}
+                        {{ \Illuminate\Support\Str::limit($movie->description, 15) }}
+                    </p>
+                    <p class="mb-2 text-base text-neutral-500 dark:text-neutral-300 text-sm">
+                        Regisseur: <strong class="italic underline">{{ $movie->director->name }}</strong> 
                     </p>
 
                     <!-- Button -->

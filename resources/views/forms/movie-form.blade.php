@@ -46,8 +46,14 @@
                   placeholder="Beschreibung...">{{ old('description', $movie->description ?? '') }}</textarea>
     </div>
     <div class="">                
-        <select name="language_id" class="w-full px-3 py-2 border border-slate-400 rounded bg-white">
-            <option value="" class="w-full p-1" selected disabled>Director</option>            
+        <select name="director_id" class="w-full px-3 py-2 border border-slate-400 rounded bg-white">
+            <option value="" class="w-full p-1" selected disabled>Director</option>
+            @foreach($directors as $director)
+                <option value="{{ $director->id }}" 
+                    {{ (isset($movie) && $movie->director_id == $director->id) ? 'selected' : '' }}>
+                    {{ $director->name }}
+                </option>
+            @endforeach
         </select>
     </div>
 

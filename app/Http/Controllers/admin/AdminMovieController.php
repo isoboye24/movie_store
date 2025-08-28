@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMovieRequest;
+use App\Models\Director;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -15,25 +16,27 @@ class AdminMovieController extends Controller
     }
 
     public function create() {
-        return view('admin.movies.create');
+        $directors = Director::all();
+        return view('admin.movies.create', compact('directors'));
     }
 
     public function store(StoreMovieRequest $request) {
         $movieData = $request->validated();
         Movie::create($movieData);
-        return view('admin.movies.index')->with('success', 'Movie created!');
+        return redirect()->route('admin.movies.index')->with('success', 'Director wurde erstellt!');
     }
 
     public function show(string $id)
     {
-        $movie = Movie::find($id);
+       $movie = Movie::with('director')->findOrFail($id);
         return view('admin.movies.show', compact('movie'));
     }
  
     public function edit(string $id)
     {   
         $movie = Movie::find($id);
-        return view('admin.movies.edit', compact('movie'));
+        $directors = Director::all();
+        return view('admin.movies.edit', compact('movie', 'directors'));
     }
 
     public function update(StoreMovieRequest $request, Movie $movie)
@@ -44,7 +47,7 @@ class AdminMovieController extends Controller
                          ->with('success', 'Film wurde aktualisiert!');
     }
 
-    public function destroy(StoreMovieRequest $request, Movie $movie)
+    public function destroy(Movie $movie)
     {
         $movie->delete();
         return redirect()->route('admin.movies.index')
