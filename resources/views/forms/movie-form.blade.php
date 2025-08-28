@@ -45,12 +45,18 @@
                   class="w-full px-3 py-2 border border-slate-400 rounded bg-white" 
                   placeholder="Beschreibung...">{{ old('description', $movie->description ?? '') }}</textarea>
     </div>
+    <div class="">                
+        <select name="language_id" class="w-full px-3 py-2 border border-slate-400 rounded bg-white">
+            <option value="" class="w-full p-1" selected disabled>Director</option>            
+        </select>
+    </div>
 
     <div>
         <button type="submit" class="w-full px-3 py-2 bg-sky-700 text-slate-100 rounded hover:bg-sky-800 hover:cursor-pointer">
             {{ isset($movie) ? 'Speichern' : 'Anlegen' }}
         </button>
     </div>
+    
     @if(isset($movie))
     <a href="{{ route('admin.movies.index') }}" class="text-slate-700 hover:text-slate-500 hover:underline">Zurück</a>
     @endif

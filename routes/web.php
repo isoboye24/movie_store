@@ -58,6 +58,9 @@ Route::get('/dashboard', function() {
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/logout', [UserController::class, 'logout']);
 
+
+
+
 // Admin dashboard Routes
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -78,12 +81,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Directors
     Route::prefix('directors')->name('directors.')->group(function () {
         Route::get('/', [AdminDirectorController::class, 'index'])->name('index');
-        // Route::get('/create', [AdminMovieController::class, 'create'])->name('create');
-        // Route::post('/', [AdminMovieController::class, 'store'])->name('store');
-        // Route::get('/{movie}', [AdminMovieController::class, 'show'])->name('show');
-        // Route::get('/{movie}/edit', [AdminMovieController::class, 'edit'])->name('edit');
-        // Route::put('/{movie}', [AdminMovieController::class, 'update'])->name('update');
-        // Route::delete('/{movie}', [AdminMovieController::class, 'destroy'])->name('destroy');
+        Route::get('/create', [AdminDirectorController::class, 'create'])->name('create');
+        Route::post('/', [AdminDirectorController::class, 'store'])->name('store');
+        Route::get('/{director}', [AdminDirectorController::class, 'show'])->name('show');
+        Route::get('/{director}/edit', [AdminDirectorController::class, 'edit'])->name('edit');
+        Route::put('/{director}', [AdminDirectorController::class, 'update'])->name('update');
+        Route::delete('/{director}', [AdminDirectorController::class, 'destroy'])->name('destroy');
     });
 
     // Users
@@ -107,8 +110,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Route::put('/{product}', [AdminProductController::class, 'update'])->name('update');
         // Route::delete('/{product}', [AdminProductController::class, 'destroy'])->name('destroy');
     });
-
-    
 
     // Orders
     Route::prefix('orders')->name('orders.')->group(function () {
